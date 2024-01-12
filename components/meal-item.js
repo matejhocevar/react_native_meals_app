@@ -1,6 +1,7 @@
 import {Image, Platform, Pressable, StyleSheet, Text, View} from "react-native";
+import MealDetails from "./meal-details";
 
-const MealItem = ({item}) => {
+const MealItem = ({item, onPress}) => {
   return (
     <View style={styles.mealItem}>
       <Pressable
@@ -9,7 +10,8 @@ const MealItem = ({item}) => {
           ({pressed}) => [
             pressed ? styles.buttonPressed : null
           ]
-        }>
+        }
+        onPress={onPress}>
         <View style={styles.innerContainer}>
           <View>
             <Image
@@ -17,11 +19,7 @@ const MealItem = ({item}) => {
               style={styles.image}/>
             <Text style={styles.title}>{item.title}</Text>
           </View>
-          <View style={styles.details}>
-            <Text style={styles.detailItem}>{item.duration}m</Text>
-            <Text style={styles.detailItem}>{item.complexity.toUpperCase()}</Text>
-            <Text style={styles.detailItem}>{item.affordability.toUpperCase()}</Text>
-          </View>
+          <MealDetails meal={item}/>
         </View>
       </Pressable>
     </View>
@@ -57,16 +55,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     margin: 8,
   },
-  details: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 8,
-  },
-  detailItem: {
-    marginHorizontal: 4,
-    fontSize: 12,
-  }
 });
 
 export default MealItem;
