@@ -4,18 +4,29 @@ import {useLayoutEffect} from "react";
 import MealDetails from "../components/meal-details";
 import MealDetailSubtitle from "../components/meal-detail/subtitle";
 import MealDetailList from "../components/meal-detail/list";
+import IconButton from "../components/icon-button";
 
 const MealDetailScreen = ({route, navigation}) => {
   const mealId = route.params.mealId;
   const meal = MEALS.find((m) => m.id === mealId);
+
+  function headerActionPressedHandler() {
+    console.log('Tapped');
+  }
 
   useLayoutEffect(() => {
     const mealTitle = meal.title;
 
     navigation.setOptions({
       title: mealTitle,
+      headerRight: () => {
+        return <IconButton
+          icon="star"
+          color="white"
+          onPress={headerActionPressedHandler}/>
+      }
     });
-  }, [mealId, navigation]);
+  }, [mealId, navigation, headerActionPressedHandler]);
 
   return (
     <ScrollView style={styles.rootScreen}>
