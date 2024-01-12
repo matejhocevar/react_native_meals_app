@@ -2,7 +2,7 @@ import {Platform, Pressable, StyleSheet, Text, View} from "react-native";
 import {LinearGradient} from "expo-linear-gradient";
 import {shadeColor} from "../utils/color";
 
-const CategoryGridTile = ({title, color}) => {
+const CategoryGridTile = ({title, color, onPress}) => {
   return (
     <View style={styles.gridItem}>
       <Pressable
@@ -11,7 +11,9 @@ const CategoryGridTile = ({title, color}) => {
           ({pressed}) => [
             styles.button,
             pressed ? styles.buttonPressed : null
-          ]}>
+          ]
+        }
+        onPress={onPress}>
         <LinearGradient
           style={styles.innerContainer}
           colors={[shadeColor(color, 20), color]}>
